@@ -64,7 +64,7 @@ class EmployeeForm(forms.ModelForm):
 
 # Step 6 - Create View Functions 
 
-In Django, a view function is a python function that takes a web request and returns a web response. iFor this example, create employees/views.py with the following code:
+In Django, a view function is a python function that takes a web request and returns a web response. For this example, create employees/views.py with the following code:
 
 ```python
 from django.shortcuts import render, redirect  
@@ -104,4 +104,166 @@ def destroy(request, id):
     employee = Employee.objects.get(id=id)  
     employee.delete()  
     return redirect("/show") 
+```
+
+# Step 7 - Create URL Mappings
+
+In Django, a url mapping is simply a mapping between a url path and a view function. function is a python function that takes a web request and returns a web response. For this example, update urls.py with the following code:
+
+```python
+from django.contrib import admin  
+from django.urls import path  
+from employee import views  
+
+urlpatterns = [  
+    path('admin/', admin.site.urls),  
+    path('emp', views.emp),  
+    path('show',views.show),  
+    path('edit/<int:id>', views.edit),  
+    path('update/<int:id>', views.update),  
+    path('delete/<int:id>', views.destroy),  
+]  
+```
+
+# Step 8 - Create HTML Templates
+
+Create a `templates` folder under `employee` and add the following html templates. 
+
+## index.html 
+
+```html 
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load staticfiles %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<form method="POST" class="post-form" action="/emp">  
+        {% csrf_token %}  
+
+    <div class="container">  
+        <br>  
+        <div class="form-group row">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+                <h3>Enter Details</h3>  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Employee Id:</label>  
+            <div class="col-sm-4">  
+                {{ form.id }}  
+            </div>  
+        </div>
+
+        <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Employee Name:</label>  
+            <div class="col-sm-4">  
+                {{ form.name }}  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+                <button type="submit" class="btn btn-primary">Submit</button>  
+            </div>  
+        </div>  
+    </div>  
+</form>  
+</body>  
+</html>  
+```
+
+## show.html 
+
+```html 
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Employee Records</title>  
+     {% load staticfiles %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Employee ID</th>  
+        <th>Employee Name</th>  
+        <th>Actions</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+    {% for employee in employees %}  
+    <tr>  
+        <td>{{ employee.eid }}</td>  
+        <td>{{ employee.ename }}</td>   
+        <td>  
+            <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="/delete/{{ employee.id }}">Delete</a>  
+        </td>  
+    </tr>  
+    {% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<center><a href="/emp" class="btn btn-primary">Add New Record</a></center>  
+</body>  
+</html> 
+```
+
+## edit.html 
+
+```html
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load staticfiles %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<form method="POST" class="post-form" action="/update/{{employee.id}}">  
+        {% csrf_token %}  
+    <div class="container">  
+        <br>  
+        <div class="form-group row">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+                <h3>Update Details</h3>  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Employee Id:</label>  
+            <div class="col-sm-4">  
+                <input type="text" name="eid" id="id_eid" required maxlength="20" value="{{ employee.id }}"/>  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Employee Name:</label>  
+            <div class="col-sm-4">  
+                <input type="text" name="ename" id="id_ename" required maxlength="100" value="{{ employee.name }}" />  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+                <button type="submit" class="btn btn-success">Update</button>  
+            </div>  
+        </div>  
+    </div>  
+</form>  
+</body>  
+</html>  
 ```

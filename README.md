@@ -141,7 +141,7 @@ urlpatterns = [
 
 # Step 8 - Create HTML Templates
 
-Create a `templates` folder under `employee` and add the following html templates. 
+Create a `templates` folder under `employee` and add the following html templates. You can learn more about Django's template language at https://docs.djangoproject.com/en/3.2/ref/templates/language/ . 
 
 ## index.html 
 
@@ -200,35 +200,45 @@ Create a `templates` folder under `employee` and add the following html template
 <html lang="en">  
 <head>  
     <meta charset="UTF-8">  
-    <title>Employee Records</title>  
-     {% load static %}  
+    <title>Index</title>  
+    {% load static %}  
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
 </head>  
 <body>  
-<table class="table table-striped table-bordered table-sm">  
-    <thead class="thead-dark">  
-    <tr>  
-        <th>Employee ID</th>  
-        <th>Employee Name</th>  
-        <th>Actions</th>  
-    </tr>  
-    </thead>  
-    <tbody>  
-    {% for employee in employees %}  
-    <tr>  
-        <td>{{ employee.id }}</td>  
-        <td>{{ employee.name }}</td>   
-        <td>  
-            <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
-            <a href="/delete/{{ employee.id }}">Delete</a>  
-        </td>  
-    </tr>  
-    {% endfor %}  
-    </tbody>  
-</table>  
-<br>  
-<br>  
-<center><a href="/emp" class="btn btn-primary">Add New Record</a></center>  
+<form method="POST" class="post-form" action="/emp">  
+    {% csrf_token %}  
+
+    <div class="container">  
+        <br>  
+        <div class="form-group row">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+                <h3>Enter Details</h3>  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Employee Id:</label>  
+            <div class="col-sm-4">  
+                {{ form.id }}  
+            </div>  
+        </div>
+
+        <div class="form-group row">  
+            <label class="col-sm-2 col-form-label">Employee Name:</label>  
+            <div class="col-sm-4">  
+                {{ form.name }}  
+            </div>  
+        </div>  
+
+        <div class="form-group row">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+                <button type="submit" class="btn btn-primary">Submit</button>  
+            </div>  
+        </div>  
+    </div>  
+</form>  
 </body>  
 </html> 
 ```
@@ -284,7 +294,57 @@ Create a `templates` folder under `employee` and add the following html template
 
 # Step 9 - Add a CSS File
 
-Create a `static/css` folder under `employee` and add a `style.css`. Unfortunately I don't have a css file for this tutorial. 
+Create a `static/css` folder under `employee` and add a `style.css`. 
+
+```css
+body {
+    font:18px/1.4 Verdana,Arial; 
+    background: #fff; 
+    height:100%; 
+    margin:25px 0; 
+    padding:0;
+    text-align: center
+}
+
+p {
+    margin-top:0
+}
+
+table { 
+    border: 1px solid black; 
+    margin: 0 auto; 
+    border-collapse: separate;
+    box-sizing: border-box;
+    table-layout: fixed;
+    width: 900px;
+}
+
+th, td { 
+    border: 1px solid black;
+    text-align: center; 
+}
+
+thead { 
+    background: #008CBA; 
+    color: #fff; 
+}
+
+tbody { 
+    background: #fff; 
+    color: #000; 
+}
+
+.button {
+    background-color: #008CBA; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+```
 
 # Step 10 - Run Migrations
 

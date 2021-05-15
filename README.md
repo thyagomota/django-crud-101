@@ -31,3 +31,18 @@ DATABASES = {
 } 
 ```
 
+# Step 4 - Create a Model for Employee
+
+Replace employee/models.py with the following: 
+
+```python
+from django.db import models  
+
+class Employee(models.Model):  
+
+    id   = models.IntegerField 
+    name = models.CharField(max_length=50)  
+     
+    class Meta:  
+        db_table = "employees"  
+```

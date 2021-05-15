@@ -284,24 +284,7 @@ Create a `templates` folder under `employee` and add the following html template
 
 # Step 9 - Add a CSS File
 
-Create a `static/css` folder under `employee` and add the following css file (you can name it `employee.css`).
-
-```css
-body {font:12px/1.4 Verdana,Arial; background:#eee; height:100%; margin:25px 0; padding:0}
-h1 {font:24px Georgia,Verdana; margin:0}
-h2 {font-size:12px; font-weight:normal; font-style:italic; margin:0 0 20px}
-p {margin-top:0}
-ul {margin:0; padding-left:20px}
-
-#testdiv {width:600px; margin:0 auto; border:1px solid #ccc; padding:20px 25px; background:#fff}
-
-#tinybox {position:absolute; display:none; padding:10px; background:#fff url(images/preload.gif) no-repeat 50% 50%; border:10px solid #e3e3e3; z-index:2000}
-#tinymask {position:absolute; display:none; top:0; left:0; height:100%; width:100%; background:#000; z-index:1500}
-#tinycontent {background:#fff}
-
-.button {font:14px Georgia,Verdana; margin-bottom:10px; padding:8px 10px 9px; border:1px solid #ccc; background:#eee; cursor:pointer}
-.button:hover {border:1px solid #bbb; background:#e3e3e3}
-```
+Create a `static/css` folder under `employee` and add a `style.css`. Unfortunately I don't have a css file for this tutorial. 
 
 # Step 10 - Run Migrations
 
@@ -343,3 +326,12 @@ You `employees` table should have the following structure:
 +-------+-------------+------+-----+---------+----------------+
 ```
 
+# Step 11 - Test your app!
+
+You app should be good to go! To start the server, run: 
+
+```
+$ python3 manage.py runserver
+```
+
+Then, open the app on `http://localhost:8000/show`. 

@@ -5,7 +5,29 @@ A simple Django webapp that performs CRUD operations, roughly based on https://w
 
 ```
 $ django-admin startproject seamagnet 
+$ cd seamagnet
 ```
 
-# Step 2 - ...
+# Step 2 - Create an App
+
+```
+$ python3 manage.py startapp employee
+```
+
+# Step 3 - Database Setup
+
+Edit seamagnet/settings.py, adding the database configuration below (replacing the root's password accordingly). 
+
+```
+DATABASES = {  
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'djangodb',  
+        'USER':'root',  
+        'PASSWORD':'<<your root's password>>',  
+        'HOST':'localhost',  
+        'PORT':'3306'  
+    }  
+} 
+```
 

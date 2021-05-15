@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'employee',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'seamagnet.wsgi.application'
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'djangodb',  
+        'NAME': 'seamagnet',  
         'USER':'root',  
         'PASSWORD':'Oracle17#',  
         'HOST':'localhost',  

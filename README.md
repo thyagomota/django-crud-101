@@ -14,21 +14,35 @@ $ cd seamagnet
 $ python3 manage.py startapp employee
 ```
 
+Open settings.py and look for the INSTALLED_APP entry. Make sure the employee app is added to the list. If not, add it!
+
+```python
+INSTALLED_APPS = [
+    'employee',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
+
 # Step 3 - Database Setup
 
-Edit seamagnet/settings.py, adding the database configuration below (replacing the root's password accordingly). 
+Edit seamagnet/settings.py, adding the database configuration below (replacing the root's password accordingly). Also, make sure that the database `seamagnet` was created in MySQL. 
 
 ```
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'djangodb',  
+        'NAME': 'seamagnet',  
         'USER':'root',  
         'PASSWORD':'<<your root's password>>',  
         'HOST':'localhost',  
         'PORT':'3306'  
     }  
-} 
+}  
 ```
 
 # Step 4 - Create a Model for Employee
@@ -287,4 +301,33 @@ ul {margin:0; padding-left:20px}
 
 .button {font:14px Georgia,Verdana; margin-bottom:10px; padding:8px 10px 9px; border:1px solid #ccc; background:#eee; cursor:pointer}
 .button:hover {border:1px solid #bbb; background:#e3e3e3}
+```
+
+# Step 10 - Run Migrations
+
+In Django, you run migrations to propagate changes made in your model to your database schema. Run the following command to propagate migrations. 
+
+```
+$ python3 manage.py makemigrations  
+$ python3 manage.py migrate
+```
+
+If everything works, you should be able to see the following tables created automatically in the `seamagnet` database: 
+
+```
++----------------------------+
+| Tables_in_seamagnet        |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| employees                  |
++----------------------------+
 ```

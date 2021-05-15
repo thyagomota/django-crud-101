@@ -3,7 +3,7 @@
 <head>  
     <meta charset="UTF-8">  
     <title>Employee Records</title>  
-     {% load staticfiles %}  
+    {% load static %}  
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
 </head>  
 <body>  
@@ -18,8 +18,8 @@
     <tbody>  
     {% for employee in employees %}  
     <tr>  
-        <td>{{ employee.eid }}</td>  
-        <td>{{ employee.ename }}</td>   
+        <td>{{ employee.id }}</td>  
+        <td>{{ employee.name }}</td>   
         <td>  
             <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
             <a href="/delete/{{ employee.id }}">Delete</a>  

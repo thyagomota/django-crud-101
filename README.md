@@ -151,7 +151,7 @@ Create a `templates` folder under `employee` and add the following html template
 <head>  
     <meta charset="UTF-8">  
     <title>Index</title>  
-    {% load staticfiles %}  
+    {% load static %}  
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
 </head>  
 <body>  
@@ -201,7 +201,7 @@ Create a `templates` folder under `employee` and add the following html template
 <head>  
     <meta charset="UTF-8">  
     <title>Employee Records</title>  
-     {% load staticfiles %}  
+     {% load static %}  
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
 </head>  
 <body>  
@@ -216,8 +216,8 @@ Create a `templates` folder under `employee` and add the following html template
     <tbody>  
     {% for employee in employees %}  
     <tr>  
-        <td>{{ employee.eid }}</td>  
-        <td>{{ employee.ename }}</td>   
+        <td>{{ employee.id }}</td>  
+        <td>{{ employee.name }}</td>   
         <td>  
             <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
             <a href="/delete/{{ employee.id }}">Delete</a>  
@@ -241,7 +241,7 @@ Create a `templates` folder under `employee` and add the following html template
 <head>  
     <meta charset="UTF-8">  
     <title>Index</title>  
-    {% load staticfiles %}  
+    {% load static %}  
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
 </head>  
 <body>  
@@ -259,14 +259,14 @@ Create a `templates` folder under `employee` and add the following html template
         <div class="form-group row">  
             <label class="col-sm-2 col-form-label">Employee Id:</label>  
             <div class="col-sm-4">  
-                <input type="text" name="eid" id="id_eid" required maxlength="20" value="{{ employee.id }}"/>  
+                <input type="text" name="id" id="id_eid" required maxlength="20" value="{{ employee.id }}"/>  
             </div>  
         </div>  
 
         <div class="form-group row">  
             <label class="col-sm-2 col-form-label">Employee Name:</label>  
             <div class="col-sm-4">  
-                <input type="text" name="ename" id="id_ename" required maxlength="100" value="{{ employee.name }}" />  
+                <input type="text" name="name" id="id_ename" required maxlength="100" value="{{ employee.name }}" />  
             </div>  
         </div>  
 
@@ -331,3 +331,15 @@ If everything works, you should be able to see the following tables created auto
 | employees                  |
 +----------------------------+
 ```
+
+You `employees` table should have the following structure: 
+
+```
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | bigint      | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+```
+
